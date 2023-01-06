@@ -1,2 +1,2 @@
-# capella-react-ui
+# capella-guardians
 DevEx UI based on React

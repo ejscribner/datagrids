@@ -1,2 +1,2 @@
-# capella-guardians
-DevEx UI based on React
+# Capella Guardians 
+Please check out project wiki for details of the project

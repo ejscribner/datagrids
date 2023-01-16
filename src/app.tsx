@@ -1,12 +1,5 @@
-import './app.scss'
+import './app.scss';
 
-function App() {
-
-  return (
-    <div className="App">
-      Hello World !
-    </div>
-  )
+export default function App() {
+  return <div>Hello World!</div>;
 }
-
-export default App

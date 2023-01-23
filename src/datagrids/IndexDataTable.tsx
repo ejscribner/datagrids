@@ -80,7 +80,7 @@ function IndexDataTable({}) {
 
   return (
     // IMPT: requires height and width for some reason?
-    <div className="w-11/12 mx-auto mt-10" style={{ height: '40vh' }}>
+    <div className="w-11/12 mx-auto mt-2" style={{ height: '40vh' }}>
       <div className="ag-theme-alpine h-full w-full">
         <AgGridReact
           rowData={rowData}

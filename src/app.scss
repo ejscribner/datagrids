@@ -207,13 +207,13 @@
 		color: var(--color-on-background);
 	}
 
-	p,
-  span :not(.monaco-editor span), /* SURF-3649 don't use Roboto in Monaco editor, want fixed width font */
-  a,
-  button {
-		line-height: normal;
-		font-family: 'Roboto', sans-serif;
-	}
+	//p,
+  //span :not(.monaco-editor span), /* SURF-3649 don't use Roboto in Monaco editor, want fixed width font */
+  //a,
+  //button {
+	//	line-height: normal;
+	//	font-family: 'Roboto', sans-serif;
+	//}
 }
 
 @layer components {

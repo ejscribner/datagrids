@@ -2,10 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .ag-row .ag-cell {
   display: flex;
   align-items: center;
+}
+
+#react-select-3-listbox {
+  z-index: 10000;
+}
+
+div.no-focus-shadow > div > div > div > div > input {
+  box-shadow: none !important;
 }
 
 /* COLORS */

@@ -1,0 +1,385 @@
+{
+  "data": {
+    "specs": [
+      {
+        "count": 3,
+        "services": ["kv", "index", "n1ql", "fts"],
+        "serviceOptions": [
+          {
+            "service": { "key": "kv", "displayName": "Data", "enabled": true },
+            "requirements": { "required": true, "min": 3 },
+            "eligibility": { "enabled": true }
+          },
+          {
+            "service": { "key": "index", "displayName": "Index", "enabled": true },
+            "requirements": { "required": false, "min": 2 },
+            "eligibility": { "enabled": true }
+          },
+          {
+            "service": { "key": "n1ql", "displayName": "Query", "enabled": true },
+            "requirements": { "required": false, "min": 2 },
+            "eligibility": { "enabled": true }
+          },
+          {
+            "service": { "key": "fts", "displayName": "Search", "enabled": true },
+            "requirements": { "required": false, "min": 2 },
+            "eligibility": { "enabled": true }
+          },
+          {
+            "service": { "key": "cbas", "displayName": "Analytics", "enabled": true },
+            "requirements": { "required": false, "min": 2 },
+            "eligibility": { "enabled": true }
+          },
+          {
+            "service": { "key": "eventing", "displayName": "Eventing", "enabled": true },
+            "requirements": { "required": false, "min": 2 },
+            "eligibility": { "enabled": true }
+          }
+        ],
+        "compute": "m5.xlarge",
+        "computeOptions": [
+          {
+            "category": "general",
+            "class": "c5",
+            "compute": { "key": "c5.2xlarge", "vcpus": "8vCPUs", "memory": "16GB" },
+            "availableStorage": [
+              { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+              { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+            ]
+          },
+          {
+            "category": "general",
+            "class": "c5",
+            "compute": { "key": "c5.9xlarge", "vcpus": "36vCPUs", "memory": "72GB" },
+            "availableStorage": [
+              { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+              { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+            ]
+          },
+          {
+            "category": "general",
+            "class": "c5",
+            "compute": { "key": "c5.18xlarge", "vcpus": "72vCPUs", "memory": "144GB" },
+            "availableStorage": [
+              { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+              { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+            ]
+          },
+          {
+            "category": "general",
+            "class": "c5",
+            "compute": { "key": "c5.4xlarge", "vcpus": "16vCPUs", "memory": "32GB" },
+            "availableStorage": [
+              { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+              { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+            ]
+          },
+          {
+            "category": "general",
+            "class": "c5",
+            "compute": { "key": "c5.12xlarge", "vcpus": "48vCPUs", "memory": "96GB" },
+            "availableStorage": [
+              { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+              { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+            ]
+          },
+          {
+            "category": "cost",
+            "class": "m5",
+            "compute": { "key": "m5.12xlarge", "vcpus": "48vCPUs", "memory": "192GB" },
+            "availableStorage": [
+              { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+              { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+            ]
+          },
+          {
+            "category": "cost",
+            "class": "m5",
+            "compute": { "key": "m5.16xlarge", "vcpus": "64vCPUs", "memory": "256GB" },
+            "availableStorage": [
+              { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+              { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+            ]
+          },
+          {
+            "category": "cost",
+            "class": "m5",
+            "compute": { "key": "m5.2xlarge", "vcpus": "8vCPUs", "memory": "32GB" },
+            "availableStorage": [
+              { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+              { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+            ]
+          },
+          {
+            "category": "cost",
+            "class": "m5",
+            "compute": { "key": "m5.4xlarge", "vcpus": "16vCPUs", "memory": "64GB" },
+            "availableStorage": [
+              { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+              { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+            ]
+          },
+          {
+            "category": "cost",
+            "class": "m5",
+            "compute": { "key": "m5.8xlarge", "vcpus": "32vCPUs", "memory": "128GB" },
+            "availableStorage": [
+              { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+              { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+            ]
+          },
+          {
+            "category": "cost",
+            "class": "m5",
+            "compute": { "key": "m5.xlarge", "vcpus": "4vCPUs", "memory": "16GB" },
+            "availableStorage": [
+              { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+              { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+            ]
+          },
+          {
+            "category": "performance",
+            "class": "r5",
+            "compute": { "key": "r5.12xlarge", "vcpus": "48vCPUs", "memory": "384GB" },
+            "availableStorage": [
+              { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+              { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+            ]
+          },
+          {
+            "category": "performance",
+            "class": "r5",
+            "compute": { "key": "r5.8xlarge", "vcpus": "32vCPUs", "memory": "256GB" },
+            "availableStorage": [
+              { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+              { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+            ]
+          },
+          {
+            "category": "performance",
+            "class": "r5",
+            "compute": { "key": "r5.2xlarge", "vcpus": "8vCPUs", "memory": "64GB" },
+            "availableStorage": [
+              { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+              { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+            ]
+          },
+          {
+            "category": "performance",
+            "class": "r5",
+            "compute": { "key": "r5.xlarge", "vcpus": "4vCPUs", "memory": "32GB" },
+            "availableStorage": [
+              { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+              { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+            ]
+          },
+          {
+            "category": "performance",
+            "class": "r5",
+            "compute": { "key": "r5.4xlarge", "vcpus": "16vCPUs", "memory": "128GB" },
+            "availableStorage": [
+              { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+              { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+            ]
+          }
+        ],
+        "disk": {
+          "type": "gp3",
+          "sizeInGb": 50,
+          "iops": 3000,
+          "options": [
+            { "key": "gp3", "requirements": { "minSize": 55, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+            { "key": "io2", "requirements": { "minSize": 55, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+          ]
+        }
+      }
+    ],
+    "newSpecOptions": {
+      "services": [
+        {
+          "service": { "key": "kv", "displayName": "Data", "enabled": true },
+          "requirements": { "required": true, "min": 3 },
+          "eligibility": { "enabled": true }
+        },
+        {
+          "service": { "key": "index", "displayName": "Index", "enabled": true },
+          "requirements": { "required": false, "min": 2 },
+          "eligibility": { "enabled": true }
+        },
+        {
+          "service": { "key": "n1ql", "displayName": "Query", "enabled": true },
+          "requirements": { "required": false, "min": 2 },
+          "eligibility": { "enabled": true }
+        },
+        {
+          "service": { "key": "cbas", "displayName": "Analytics", "enabled": true },
+          "requirements": { "required": false, "min": 2 },
+          "eligibility": { "enabled": true, "restrictedToPlans": ["Developer Pro", "Enterprise"] }
+        },
+        {
+          "service": { "key": "fts", "displayName": "Search", "enabled": true },
+          "requirements": { "required": false, "min": 2 },
+          "eligibility": { "enabled": true }
+        },
+        {
+          "service": { "key": "eventing", "displayName": "Eventing", "enabled": true },
+          "requirements": { "required": false, "min": 2 },
+          "eligibility": { "enabled": true, "restrictedToPlans": ["Developer Pro", "Enterprise"] }
+        }
+      ],
+      "availableCompute": [
+        {
+          "category": "general",
+          "class": "c5",
+          "compute": { "key": "c5.2xlarge", "vcpus": "8vCPUs", "memory": "16GB" },
+          "availableStorage": [
+            { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+            { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+          ]
+        },
+        {
+          "category": "general",
+          "class": "c5",
+          "compute": { "key": "c5.9xlarge", "vcpus": "36vCPUs", "memory": "72GB" },
+          "availableStorage": [
+            { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+            { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+          ]
+        },
+        {
+          "category": "general",
+          "class": "c5",
+          "compute": { "key": "c5.18xlarge", "vcpus": "72vCPUs", "memory": "144GB" },
+          "availableStorage": [
+            { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+            { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+          ]
+        },
+        {
+          "category": "general",
+          "class": "c5",
+          "compute": { "key": "c5.4xlarge", "vcpus": "16vCPUs", "memory": "32GB" },
+          "availableStorage": [
+            { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+            { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+          ]
+        },
+        {
+          "category": "general",
+          "class": "c5",
+          "compute": { "key": "c5.12xlarge", "vcpus": "48vCPUs", "memory": "96GB" },
+          "availableStorage": [
+            { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+            { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+          ]
+        },
+        {
+          "category": "cost",
+          "class": "m5",
+          "compute": { "key": "m5.12xlarge", "vcpus": "48vCPUs", "memory": "192GB" },
+          "availableStorage": [
+            { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+            { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+          ]
+        },
+        {
+          "category": "cost",
+          "class": "m5",
+          "compute": { "key": "m5.16xlarge", "vcpus": "64vCPUs", "memory": "256GB" },
+          "availableStorage": [
+            { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+            { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+          ]
+        },
+        {
+          "category": "cost",
+          "class": "m5",
+          "compute": { "key": "m5.2xlarge", "vcpus": "8vCPUs", "memory": "32GB" },
+          "availableStorage": [
+            { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+            { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+          ]
+        },
+        {
+          "category": "cost",
+          "class": "m5",
+          "compute": { "key": "m5.4xlarge", "vcpus": "16vCPUs", "memory": "64GB" },
+          "availableStorage": [
+            { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+            { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+          ]
+        },
+        {
+          "category": "cost",
+          "class": "m5",
+          "compute": { "key": "m5.8xlarge", "vcpus": "32vCPUs", "memory": "128GB" },
+          "availableStorage": [
+            { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+            { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+          ]
+        },
+        {
+          "category": "cost",
+          "class": "m5",
+          "compute": { "key": "m5.xlarge", "vcpus": "4vCPUs", "memory": "16GB" },
+          "availableStorage": [
+            { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+            { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+          ]
+        },
+        {
+          "category": "performance",
+          "class": "r5",
+          "compute": { "key": "r5.12xlarge", "vcpus": "48vCPUs", "memory": "384GB" },
+          "availableStorage": [
+            { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+            { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+          ]
+        },
+        {
+          "category": "performance",
+          "class": "r5",
+          "compute": { "key": "r5.8xlarge", "vcpus": "32vCPUs", "memory": "256GB" },
+          "availableStorage": [
+            { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+            { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+          ]
+        },
+        {
+          "category": "performance",
+          "class": "r5",
+          "compute": { "key": "r5.2xlarge", "vcpus": "8vCPUs", "memory": "64GB" },
+          "availableStorage": [
+            { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+            { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+          ]
+        },
+        {
+          "category": "performance",
+          "class": "r5",
+          "compute": { "key": "r5.xlarge", "vcpus": "4vCPUs", "memory": "32GB" },
+          "availableStorage": [
+            { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+            { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+          ]
+        },
+        {
+          "category": "performance",
+          "class": "r5",
+          "compute": { "key": "r5.4xlarge", "vcpus": "16vCPUs", "memory": "128GB" },
+          "availableStorage": [
+            { "key": "gp3", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 3000, "maxIops": 16000 } },
+            { "key": "io2", "requirements": { "minSize": 50, "maxSize": 16000, "minIops": 1000, "maxIops": 64000 } }
+          ]
+        }
+      ],
+      "eligibility": { "enabled": true }
+    }
+  },
+  "permissions": {
+    "create": { "accessible": true },
+    "read": { "accessible": true },
+    "update": { "accessible": true },
+    "delete": { "accessible": true }
+  }
+}

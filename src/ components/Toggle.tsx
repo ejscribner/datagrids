@@ -15,10 +15,9 @@ interface Props {
 
 const toggleStyle = (isSelected: boolean, disabled: boolean) => {
   if (isSelected) return 'bg-primary active:bg-primary-active text-on-primary';
-  else
-    return !disabled
-      ? 'bg-inactive text-on-inactive active:bg-primary-active ' + 'hover:bg-primary-hover hover:text-on-primary active:text-on-primary'
-      : '';
+  return !disabled
+    ? 'bg-inactive text-on-inactive active:bg-primary-active ' + 'hover:bg-primary-hover hover:text-on-primary active:text-on-primary'
+    : '';
 };
 
 const matchValueType = (value: any, newValue: any) => {

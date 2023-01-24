@@ -18,8 +18,8 @@ function BucketColumnRenderer(props: any) {
 }
 
 function StatusColumnRenderer(props: any) {
-  let status = props.data.status;
-  let statusMap = {
+  const { status } = props.data;
+  const statusMap = {
     completed: 'Completed',
     loading: 'Loading',
     waiting_file_upload: 'Awaiting File Upload',
@@ -36,7 +36,7 @@ function StatusColumnRenderer(props: any) {
           ),
           loading: (
             <span className="pr-2" style={{ color: 'rgb(66,135,214)' }}>
-              <FontAwesomeIcon icon={faSpinner} spin={true} />
+              <FontAwesomeIcon icon={faSpinner} spin />
             </span>
           ),
           waiting_file_upload: (
@@ -64,32 +64,32 @@ function ImportedByColumnRenderer(props: any) {
 
 function ImportedOnColumnRenderer(props: any) {
   function timeSince(date) {
-    let seconds = Math.floor((new Date() - date) / 1000);
+    const seconds = Math.floor((new Date() - date) / 1000);
     let interval = seconds / 31536000;
 
     if (interval > 1) {
-      return Math.floor(interval) + ' years ago';
+      return `${Math.floor(interval)} years ago`;
     }
     interval = seconds / 2592000;
     if (interval > 1) {
-      return Math.floor(interval) + ' months ago';
+      return `${Math.floor(interval)} months ago`;
     }
     interval = seconds / 86400;
     if (interval > 1) {
-      return Math.floor(interval) + ' days ago';
+      return `${Math.floor(interval)} days ago`;
     }
     interval = seconds / 3600;
     if (interval > 1) {
-      return Math.floor(interval) + ' hours ago';
+      return `${Math.floor(interval)} hours ago`;
     }
     interval = seconds / 60;
     if (interval > 1) {
-      return Math.floor(interval) + ' minutes ago';
+      return `${Math.floor(interval)} minutes ago`;
     }
-    return Math.floor(seconds) + ' seconds ago';
+    return `${Math.floor(seconds)} seconds ago`;
   }
 
-  let date = props.data.importedOn;
+  const date = props.data.importedOn;
   return (
     <div className="flex flex-col">
       <span className="-mb-2">{date.toDateString()}</span>
@@ -108,7 +108,7 @@ function ImportFileColumnRenderer(props: any) {
 
     const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-    return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
+    return `${parseFloat((bytes / k ** i).toFixed(dm))} ${sizes[i]}`;
   }
 
   return (
@@ -127,7 +127,7 @@ function KebabButtonRenderer(props: any) {
   );
 }
 
-function ImportDataTable({}) {
+function ImportDataTable() {
   const defaultColDef = useMemo(() => {
     return {
       sortable: true,
@@ -179,7 +179,7 @@ function ImportDataTable({}) {
 
   return (
     // IMPT: requires height and width for some reason?
-    <div className="w-11/12 mx-auto mt-2" style={{ height: '40vh' }}>
+    <div className="mx-auto mt-2" style={{ height: '40vh' }}>
       <div className="ag-theme-alpine h-full w-full">
         <AgGridReact
           rowData={rowData}
@@ -190,6 +190,7 @@ function ImportDataTable({}) {
           paginationPageSize={10}
           rowHeight={65}
           onCellClicked={onCellClicked}
+          onGridSizeChanged={(e) => (e.clientWidth > 1024 ? e.api.sizeColumnsToFit() : null)}
         />
       </div>
     </div>

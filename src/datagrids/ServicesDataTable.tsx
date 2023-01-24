@@ -1,17 +1,16 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useState } from 'react';
+import Select, { components } from 'react-select';
 import fontawesome from '@fortawesome/fontawesome';
 import { faCircle, faCircleUser, faEllipsisV, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AgGridReact } from 'ag-grid-react';
-import Select, { components } from 'react-select';
-import Toggle from '../ components/Toggle';
+import Toggle from ' components/Toggle';
 import servicesData from './data/servicesData.json';
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 fontawesome.library.add(faEllipsisV, faCircle, faCircleUser, faSpinner); // Optional theme CSS
 
-function ServicesCellRenderer(props: any) {
+function ServicesCellRenderer() {
   const options = [
     { value: 'data', label: 'Data' },
     { value: 'index', label: 'Index' },
@@ -42,7 +41,7 @@ function ServicesCellRenderer(props: any) {
   );
 }
 
-function NodesCellRenderer(props: any) {
+function NodesCellRenderer() {
   const options = [
     { value: 3, label: '3' },
     { value: 4, label: '4' },
@@ -64,16 +63,16 @@ function NodesCellRenderer(props: any) {
   );
 }
 
-function ComputeCellRenderer(props: any) {
+function ComputeCellRenderer() {
   const options = servicesData.data.specs[0].computeOptions.map((computeOption) => {
     return {
       value: computeOption.compute.key,
-      label: computeOption.compute.vcpus + ' ' + computeOption.compute.memory,
+      label: `${computeOption.compute.vcpus} ${computeOption.compute.memory}`,
       subheading: computeOption.compute.key,
     };
   });
 
-  const Option = (props) => {
+  function Option(props: any) {
     return (
       <div className="flex">
         <components.Option {...props}>
@@ -82,7 +81,7 @@ function ComputeCellRenderer(props: any) {
         </components.Option>
       </div>
     );
-  };
+  }
 
   return (
     <div className="w-full no-focus-shadow">
@@ -91,7 +90,7 @@ function ComputeCellRenderer(props: any) {
   );
 }
 
-function DiskCellRenderer(props: any) {
+function DiskCellRenderer() {
   const options = [
     { value: 'gp3', label: 'GP3' },
     { value: 'io2', label: 'IO2' },
@@ -99,12 +98,12 @@ function DiskCellRenderer(props: any) {
 
   return (
     <div>
-      <Toggle value={'gp3'} options={options} altText="" />
+      <Toggle value="gp3" options={options} altText="" />
     </div>
   );
 }
 
-function StorageCellRenderer(props: any) {
+function StorageCellRenderer() {
   return (
     <div>
       <input
@@ -121,7 +120,7 @@ function StorageCellRenderer(props: any) {
   );
 }
 
-function IOPSCellRenderer(props: any) {
+function IOPSCellRenderer() {
   return (
     <div>
       <input
@@ -138,8 +137,8 @@ function IOPSCellRenderer(props: any) {
   );
 }
 
-function ServicesDataTable({}) {
-  const [rowData, setRowData] = useState([
+function ServicesDataTable() {
+  const [rowData] = useState([
     {
       services: 'services dropdown',
       nodes: 'nodes dropdown',
@@ -149,12 +148,6 @@ function ServicesDataTable({}) {
       iops: 'iops picker',
     },
   ]);
-
-  const onCellClicked = (params) => {
-    if (params.column.colId === 'flyout') {
-      console.log('open flyout menu');
-    }
-  };
 
   const [columnDefs] = useState([
     { field: 'services', headerName: 'Services', cellRenderer: ServicesCellRenderer, width: 500 },
@@ -167,9 +160,14 @@ function ServicesDataTable({}) {
 
   return (
     // IMPT: requires height and width for some reason?
-    <div className="w-11/12 mx-auto mt-2" style={{ height: '40vh' }}>
+    <div className="mx-auto mt-2" style={{ height: '40vh' }}>
       <div className="ag-theme-alpine h-full w-full">
-        <AgGridReact rowData={rowData} columnDefs={columnDefs} rowHeight={120} />
+        <AgGridReact
+          rowData={rowData}
+          columnDefs={columnDefs}
+          rowHeight={120}
+          onGridSizeChanged={(e) => (e.clientWidth > 1200 ? e.api.sizeColumnsToFit() : null)}
+        />
       </div>
     </div>
   );

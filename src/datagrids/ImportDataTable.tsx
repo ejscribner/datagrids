@@ -179,7 +179,7 @@ function ImportDataTable() {
 
   return (
     // IMPT: requires height and width for some reason?
-    <div className="mx-auto mt-2" style={{ height: '40vh' }}>
+    <div className="mx-auto" style={{ height: '40vh' }}>
       <div className="ag-theme-alpine h-full w-full">
         <AgGridReact
           rowData={rowData}

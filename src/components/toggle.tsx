@@ -10,7 +10,7 @@ interface Props {
   options: Option[];
   altText: string;
   disabled?: boolean;
-  onUpdate: (val: any | null) => void;
+  onUpdate?: (val: any | null) => void;
 }
 
 const toggleStyle = (isSelected: boolean, disabled: boolean) => {

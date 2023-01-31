@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import fontawesome from '@fortawesome/fontawesome';
+import fontawesome, { IconDefinition } from '@fortawesome/fontawesome';
 import { faCircle, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AgGridReact } from 'ag-grid-react';
@@ -7,7 +7,7 @@ import indexData from './data/indexStatus.json';
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
-fontawesome.library.add(faTrashCan, faCircle); // Optional theme CSS
+fontawesome.library.add(faTrashCan as IconDefinition, faCircle as IconDefinition); // Optional theme CSS
 
 function DeleteButtonRenderer(props: any) {
   return (
@@ -39,6 +39,7 @@ function IndexDataTable() {
 
   const [rowData, setRowData] = useState([]);
 
+  // @ts-ignore
   const onCellClicked = (params) => {
     if (params.column.colId === 'delete') {
       params.api.applyTransaction({

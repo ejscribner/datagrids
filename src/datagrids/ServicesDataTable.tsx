@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import Select, { components } from 'react-select';
-import fontawesome from '@fortawesome/fontawesome';
+import fontawesome, { IconDefinition } from '@fortawesome/fontawesome';
 import { faCircle, faCircleUser, faEllipsisV, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { AgGridReact } from 'ag-grid-react';
-import Toggle from ' components/Toggle';
+import Toggle from 'components/toggle';
 import servicesData from './data/servicesData.json';
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
-fontawesome.library.add(faEllipsisV, faCircle, faCircleUser, faSpinner); // Optional theme CSS
+fontawesome.library.add(
+  faEllipsisV as IconDefinition,
+  faCircle as IconDefinition,
+  faCircleUser as IconDefinition,
+  faSpinner as IconDefinition
+); // Optional theme CSS
 
 function ServicesCellRenderer() {
   const options = [
@@ -34,6 +39,7 @@ function ServicesCellRenderer() {
         styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
         isMulti
         defaultValue={selectedOptions}
+        // @ts-ignore
         onChange={setSelectedOptions}
         options={options}
       />

@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import fontawesome from '@fortawesome/fontawesome';
+import fontawesome, { IconDefinition } from '@fortawesome/fontawesome';
 import { faCircle, faCircleUser, faEllipsisV, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AgGridReact } from 'ag-grid-react';
@@ -7,7 +7,12 @@ import importData from './data/importData.json';
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
-fontawesome.library.add(faEllipsisV, faCircle, faCircleUser, faSpinner); // Optional theme CSS
+fontawesome.library.add(
+  faEllipsisV as IconDefinition,
+  faCircle as IconDefinition,
+  faCircleUser as IconDefinition,
+  faSpinner as IconDefinition
+); // Optional theme CSS
 
 function BucketColumnRenderer(props: any) {
   return (
@@ -19,7 +24,7 @@ function BucketColumnRenderer(props: any) {
 
 function StatusColumnRenderer(props: any) {
   const { status } = props.data;
-  const statusMap = {
+  const statusMap: { [key: string]: string } = {
     completed: 'Completed',
     loading: 'Loading',
     waiting_file_upload: 'Awaiting File Upload',
@@ -28,6 +33,7 @@ function StatusColumnRenderer(props: any) {
   return (
     <div>
       {
+        // @ts-ignore
         {
           completed: (
             <span className="pr-2 text-xs" style={{ color: 'rgb(75, 174, 62)' }}>
@@ -63,7 +69,8 @@ function ImportedByColumnRenderer(props: any) {
 }
 
 function ImportedOnColumnRenderer(props: any) {
-  function timeSince(date) {
+  function timeSince(date: Date) {
+    // @ts-ignore
     const seconds = Math.floor((new Date() - date) / 1000);
     let interval = seconds / 31536000;
 
@@ -136,18 +143,9 @@ function ImportDataTable() {
     };
   }, []);
 
-  const [rowData, setRowData] = useState([
-    //  TODO: need to load this from file going forward
-    //   TODO: need complex types for this importedON and importFile
-    {
-      bucket: 'projects',
-      status: 'Completed',
-      importedBy: 'Aaron LaBeau',
-      importedOn: new Date(),
-      importFile: { name: 'sample-data.json', size: '15.2 KB' },
-    },
-  ]);
+  const [rowData, setRowData] = useState([]);
 
+  // @ts-ignore
   const onCellClicked = (params) => {
     if (params.column.colId === 'flyout') {
       console.log('open flyout menu');

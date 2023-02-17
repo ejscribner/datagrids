@@ -1,36 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Select, { components } from 'react-select';
 import fontawesome, { IconDefinition } from '@fortawesome/fontawesome';
-import { faCircle, faCircleUser, faEllipsisV, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faCircleUser, faEllipsisV, faPlus, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { AgGridReact } from 'ag-grid-react';
 import Toggle from 'components/toggle';
 import servicesData from './data/servicesData.json';
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import 'ag-grid-community/styles/ag-theme-alpine.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch, faAreaChart, faBarcode, faCalendar, faTelevision, faReorder } from '@fortawesome/free-solid-svg-icons';
+import parser from 'html-react-parser';
 
 fontawesome.library.add(
   faEllipsisV as IconDefinition,
   faCircle as IconDefinition,
   faCircleUser as IconDefinition,
-  faSpinner as IconDefinition
+  faSpinner as IconDefinition,
+  faSearch as IconDefinition
 ); // Optional theme CSS
+
+{/* <FontAwesomeIcon icon={faSearch} style={{alignSelf:"center", margin: "0 5px 0 5px", color:"#aaa"}}/> */}
 
 function ServicesCellRenderer() {
   const options = [
-    { value: 'data', label: 'Data' },
-    { value: 'index', label: 'Index' },
-    { value: 'query', label: 'Query' },
-    { value: 'search', label: 'Search' },
-    { value: 'analytics', label: 'Analytics' },
-    { value: 'eventing', label: 'Eventing' },
+    { value: 'data', label:  <span><FontAwesomeIcon icon={faAreaChart} style={{alignSelf:"center", margin: "0 5px 0 5px"}}></FontAwesomeIcon>Data</span>},
+    { value: 'index', label: <span><FontAwesomeIcon icon={faBarcode} style={{alignSelf:"center", margin: "0 5px 0 5px"}}></FontAwesomeIcon>Index</span>},
+    { value: 'query', label: <span><FontAwesomeIcon icon={faCalendar} style={{alignSelf:"center", margin: "0 5px 0 5px"}}></FontAwesomeIcon>Query</span>},
+    { value: 'search', label: <span><FontAwesomeIcon icon={faSearch} style={{alignSelf:"center", margin: "0 5px 0 5px"}}></FontAwesomeIcon>Search</span>},
+    { value: 'analytics', label: <span><FontAwesomeIcon icon={faTelevision} style={{alignSelf:"center", margin: "0 5px 0 5px"}}></FontAwesomeIcon>Analytics</span>},
+    { value: 'eventing', label: <span><FontAwesomeIcon icon={faReorder} style={{alignSelf:"center", margin: "0 5px 0 5px"}}></FontAwesomeIcon>Eventing</span>},
   ];
 
   const [selectedOptions, setSelectedOptions] = useState([
-    { value: 'data', label: 'Data' },
-    { value: 'index', label: 'Index' },
-    { value: 'query', label: 'Query' },
-    { value: 'search', label: 'Search' },
+    { value: 'data', label:  <span><FontAwesomeIcon icon={faAreaChart} style={{alignSelf:"center", margin: "0 5px 0 5px"}}></FontAwesomeIcon>Data</span>},
+    { value: 'index', label: <span><FontAwesomeIcon icon={faBarcode} style={{alignSelf:"center", margin: "0 5px 0 5px"}}></FontAwesomeIcon>Index</span>},
+    { value: 'query', label: <span><FontAwesomeIcon icon={faCalendar} style={{alignSelf:"center", margin: "0 5px 0 5px"}}></FontAwesomeIcon>Query</span>},
+    { value: 'search', label: <span><FontAwesomeIcon icon={faSearch} style={{alignSelf:"center", margin: "0 5px 0 5px"}}></FontAwesomeIcon>Search</span>},
   ]);
+
 
   return (
     <div className="w-full no-focus-shadow">
@@ -39,6 +46,7 @@ function ServicesCellRenderer() {
         styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
         isMulti
         defaultValue={selectedOptions}
+        // tagRender={}
         // @ts-ignore
         onChange={setSelectedOptions}
         options={options}
@@ -144,6 +152,7 @@ function IOPSCellRenderer() {
 }
 
 function ServicesDataTable() {
+  const [saveFlag, setSaveFlag] = useState(false);
   const [rowData] = useState([
     {
       services: 'services dropdown',
@@ -155,12 +164,17 @@ function ServicesDataTable() {
     },
   ]);
 
+  const onRowSelected = useCallback((event) => {
+    if(event.node.isSelected() == true)
+      setSaveFlag(true);
+  }, []);
+
   const [columnDefs] = useState([
-    { field: 'services', headerName: 'Services', cellRenderer: ServicesCellRenderer, width: 500 },
-    { field: 'nodes', headerName: 'Nodes', cellRenderer: NodesCellRenderer, width: 120 },
-    { field: 'compute', headerName: 'Compute', cellRenderer: ComputeCellRenderer, width: 250 },
-    { field: 'diskType', headerName: 'Disk Type', cellRenderer: DiskCellRenderer, width: 150 },
-    { field: 'storage', headerName: 'Storage (GB)', cellRenderer: StorageCellRenderer, width: 120 },
+    { field: 'services', headerName: 'SERVICES', cellRenderer: ServicesCellRenderer, width: 500},
+    { field: 'nodes', headerName: 'NODES', cellRenderer: NodesCellRenderer, width: 120 },
+    { field: 'compute', headerName: 'COMPUTE', cellRenderer: ComputeCellRenderer, width: 250 },
+    { field: 'diskType', headerName: 'DISK TYPE', cellRenderer: DiskCellRenderer, width: 150 },
+    { field: 'storage', headerName: 'STORAGE (GB)', cellRenderer: StorageCellRenderer, width: 120 },
     { field: 'iops', headerName: 'IOPS', cellRenderer: IOPSCellRenderer, width: 150 },
   ]);
 
@@ -168,12 +182,32 @@ function ServicesDataTable() {
     // IMPT: requires height and width for some reason?
     <div className="mx-auto" style={{ height: '40vh' }}>
       <div className="ag-theme-alpine h-full w-full">
+        <div className="services-header">
+          <div style={{marginTop: "16px", fontSize: "24px", fontWeight: "600"}}>Services</div>
+          <div>
+            <button className='btn-add-group'>
+              <div style={{backgroundColor:"#0266c2", color:"white", borderRadius:"5px", padding:"15px", fontSize:'small', fontWeight: "600"}}>
+                <FontAwesomeIcon icon={faPlus} style={{color:'white', marginRight:"15px"}}/>Add Service Group
+              </div>
+            </button>
+          </div>
+        </div>
+        <div style={{fontSize: 'small', marginBottom: '20px', fontWeight: '500'}}>Your available services depend on your database plan. <a href='#' style={{color:'#0266c2'}}>Learn More</a>
+        </div>
         <AgGridReact
+          className='services'
           rowData={rowData}
           columnDefs={columnDefs}
           rowHeight={120}
+          rowSelection={'single'}
+          onRowSelected={onRowSelected}
           onGridSizeChanged={(e) => (e.clientWidth > 1200 ? e.api.sizeColumnsToFit() : null)}
         />
+        { saveFlag ? (
+          <div style={{flex:"50%", marginTop:"0.5em"}}>
+            <button className='btn save' type="button" >Save</button>
+            <button className='btn cancel'type='button'>Cancel</button>
+          </div>) : null}
       </div>
     </div>
   );

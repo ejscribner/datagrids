@@ -1,0 +1,166 @@
+.ag-theme-alpine .ag-icon-none{
+  --ag-icon-font-family: 'Material Design Icons';
+  --ag-icon-font-code-none: '\F0A65';
+}
+.ag-theme-alpine .ag-icon-desc{
+  --ag-icon-font-family: 'Material Design Icons';
+  --ag-icon-font-code-desc: '\F06B6';
+  padding-top: 6px;
+  color: dodgerblue;
+}
+.ag-theme-alpine .ag-icon-asc{
+  --ag-icon-font-family: 'Material Design Icons';
+  --ag-icon-font-code-asc: '\F06B7';
+  padding-bottom: 6px;
+  color: dodgerblue;
+}
+.ag-theme-alpine {
+  --ag-header-height: 30px;
+}
+.ag-theme-alpine .ag-header-cell {
+  color: #6d6868;
+  font-weight: 600;
+  font-size: 12px;
+}
+ 
+.ag-theme-alpine #page-size {
+  border-width : 0px;
+  font-size: small;
+  padding-right: 20px;
+  padding-top: 4px;
+  padding-bottom: 3px;
+  padding-left: 3px;
+  /* padding: 0 1.5em 0 1em; */
+  /* margin: 0 0 0 1em; */
+}
+.ag-theme-alpine .ag-header-row-column {
+  /* font-size: smaller; */
+  /* font-weight: bold; */
+  color: #aaa;
+}
+.index-header {
+  margin-bottom: 24px;
+  margin-bottom: 24px;
+  font-weight: 800;
+  font-size: 18px;
+}
+.ag-theme-alpine .grid-header {
+  border: 1px solid;
+  border-color: #aaa;
+  border-bottom: none; 
+  padding-left: 18px;
+  padding-top: 2px;
+  padding-bottom: 2px; 
+  color: #6d6868; 
+  font-weight: bolder
+}
+.ag-theme-alpine .grid-bottom {
+  float: right;
+  width: 100%; 
+  padding: 10px;
+  display: flex; 
+  justify-content: end; 
+  font-weight: normal; 
+  color: #aaa;
+}
+.ag-theme-alpine .page-last {
+  margin-left: 30px; 
+  margin-right: 30px; 
+  font-size: larger;
+}
+.ag-theme-alpine .page-next {
+  margin-right: 8px; 
+  font-size: larger;
+}
+
+.btn {
+  border: none; /* Remove borders */
+  color: white; /* Add a text color */
+  padding-top: 4px; /* Add some padding */
+  padding-Bottom: 4px; /* Add some padding */
+  min-width: 6em;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer; /* Add a pointer cursor on mouse-over */
+}
+.info {
+  background-color: #0266c2;
+  float: right;
+}
+.save {
+  background-color:#0266c2;
+  float: left;
+}
+.cancel {
+  margin-left: 1em;
+  background-color: #fff;
+  float: left;
+  color: #0266c2;
+}
+.ag-theme-alpine .css-1p3m7a8-multiValue{
+  background-color: aliceblue;
+  border-radius: 20px;
+}
+.css-12a83d4-MultiValueRemove:hover {
+  background-color: aliceblue !important;
+  color: #000000 !important;
+  border-radius: 20px;
+}
+.css-1y7rh0y-MultiValueGeneric2 {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+.services{
+  /* --ag-header-foreground-color: rgb(255,255,255); */
+  --ag-header-background-color: rgb(0, 0, 0);
+}
+.services .ag-header-cell-text {
+  color: white;
+}
+.services-header {
+  margin-bottom: 24px;
+  margin-bottom: 24px;
+  font-weight: 800;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+.btn-add-group{
+  background-color: white; 
+  border-color: #2196F3; 
+  border-width: 2px; 
+  padding: 3px; 
+  border-radius: 5px;
+}
+.import-header {
+  display: flex; 
+  justify-content: space-between; 
+  margin-bottom: 24px; 
+  margin-top: 24px;
+}
+.import-header-left{
+  flex:50%;
+  display:flex;
+  align-self:center;
+}
+.import-header-right{
+  flex:50%;
+}
+.import-header-title{
+  font-size:18px;
+  align-self:stretch;
+  margin-top: 4px;
+  font-weight: 700;
+}
+.import-header-search{
+  padding:3px;
+  border-color:white white #aaa white;
+  border-width:1px;
+  margin-left:12px;
+  display : flex;
+  align-self:stretch;
+}
+.import-header-toggle{
+  margin-left:12px;
+  align-self:stretch;
+}

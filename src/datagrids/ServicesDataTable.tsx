@@ -6,7 +6,6 @@ import { AgGridReact } from 'ag-grid-react';
 import Toggle from 'components/toggle';
 import servicesData from './data/servicesData.json';
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
-import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faAreaChart, faBarcode, faCalendar, faTelevision, faReorder } from '@fortawesome/free-solid-svg-icons';
 import parser from 'html-react-parser';
@@ -37,18 +36,35 @@ function ServicesCellRenderer() {
     { value: 'query', label: <span><FontAwesomeIcon icon={faCalendar} style={{alignSelf:"center", margin: "0 5px 0 5px"}}></FontAwesomeIcon>Query</span>},
     { value: 'search', label: <span><FontAwesomeIcon icon={faSearch} style={{alignSelf:"center", margin: "0 5px 0 5px"}}></FontAwesomeIcon>Search</span>},
   ]);
-
-
+  const colourStyles = {
+    multiValue: (styles:any) => {
+      return {
+        ...styles,
+        backgroundColor: 'aliceblue',
+        borderRadius: '20px',
+        paddingRight: '3px',
+        paddingLeft: '3px'
+      };
+    },
+    multiValueLabel: () => ({
+      color: 'black',
+    }),
+    multiValueRemove: () => ({
+      ':hover': {
+        backgroundColor: 'none',
+      },
+    }),
+  }
   return (
     <div className="w-full no-focus-shadow">
       <Select
         menuPortalTarget={document.body}
-        styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
+        styles={{menuPortal: (base) => ({ ...base, zIndex: 9999 })}}
         isMulti
         defaultValue={selectedOptions}
-        // tagRender={}
         // @ts-ignore
         onChange={setSelectedOptions}
+        styles={colourStyles}
         options={options}
       />
     </div>
@@ -164,35 +180,32 @@ function ServicesDataTable() {
     },
   ]);
 
-  const onRowSelected = useCallback((event) => {
-    if(event.node.isSelected() == true)
-      setSaveFlag(true);
-  }, []);
-
   const [columnDefs] = useState([
-    { field: 'services', headerName: 'SERVICES', cellRenderer: ServicesCellRenderer, width: 500},
-    { field: 'nodes', headerName: 'NODES', cellRenderer: NodesCellRenderer, width: 120 },
-    { field: 'compute', headerName: 'COMPUTE', cellRenderer: ComputeCellRenderer, width: 250 },
-    { field: 'diskType', headerName: 'DISK TYPE', cellRenderer: DiskCellRenderer, width: 150 },
-    { field: 'storage', headerName: 'STORAGE (GB)', cellRenderer: StorageCellRenderer, width: 120 },
-    { field: 'iops', headerName: 'IOPS', cellRenderer: IOPSCellRenderer, width: 150 },
+    { field: 'services', headerName: 'services', cellRenderer: ServicesCellRenderer, width: 500},
+    { field: 'nodes', headerName: 'nodes', cellRenderer: NodesCellRenderer, width: 120 },
+    { field: 'compute', headerName: 'compute', cellRenderer: ComputeCellRenderer, width: 250 },
+    { field: 'diskType', headerName: 'disk type', cellRenderer: DiskCellRenderer, width: 150 },
+    { field: 'storage', headerName: 'storage (GB)', cellRenderer: StorageCellRenderer, width: 120 },
+    { field: 'iops', headerName: 'iops', cellRenderer: IOPSCellRenderer, width: 150 },
   ]);
 
   return (
     // IMPT: requires height and width for some reason?
     <div className="mx-auto" style={{ height: '40vh' }}>
-      <div className="ag-theme-alpine h-full w-full">
-        <div className="services-header">
-          <div style={{marginTop: "16px", fontSize: "24px", fontWeight: "600"}}>Services</div>
-          <div>
+      <div className="ag-theme-custom h-full w-full">
+        <div className="header">
+          <div className='header-left'>
+            <div style={{marginTop: "16px", fontSize: "24px", fontWeight: "600"}}>Services</div>
+          </div>
+          <div className='header-right'>
             <button className='btn-add-group'>
-              <div style={{backgroundColor:"#0266c2", color:"white", borderRadius:"5px", padding:"15px", fontSize:'small', fontWeight: "600"}}>
+              <div className='btn-add-group inline'>
                 <FontAwesomeIcon icon={faPlus} style={{color:'white', marginRight:"15px"}}/>Add Service Group
               </div>
             </button>
           </div>
         </div>
-        <div style={{fontSize: 'small', marginBottom: '20px', fontWeight: '500'}}>Your available services depend on your database plan. <a href='#' style={{color:'#0266c2'}}>Learn More</a>
+        <div className='header-subtitle'>Your available services depend on your database plan. <a href='#' style={{color:'#0266c2'}}>Learn More</a>
         </div>
         <AgGridReact
           className='services'
@@ -200,14 +213,15 @@ function ServicesDataTable() {
           columnDefs={columnDefs}
           rowHeight={120}
           rowSelection={'single'}
-          onRowSelected={onRowSelected}
+          suppressRowClickSelection={true}
+          onRowClicked={() => setSaveFlag(true)}
           onGridSizeChanged={(e) => (e.clientWidth > 1200 ? e.api.sizeColumnsToFit() : null)}
         />
         { saveFlag ? (
-          <div style={{flex:"50%", marginTop:"0.5em"}}>
+          <div className='save-option'>
             <button className='btn save' type="button" >Save</button>
             <button className='btn cancel'type='button'>Cancel</button>
-          </div>) : null}
+          </div>) : null }
       </div>
     </div>
   );

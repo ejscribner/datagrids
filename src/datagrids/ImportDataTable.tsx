@@ -5,8 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AgGridReact } from 'ag-grid-react';
 import importData from './data/importData.json';
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
-import 'ag-grid-community/styles/ag-theme-alpine.css';
-import './style.css';
+import './style.scss';
 import Importheader from 'components/importHeader';
 fontawesome.library.add(
   faEllipsisV as IconDefinition,
@@ -168,7 +167,7 @@ function ImportDataTable() {
     index < 0 ? setPageIndex(0) : setPageIndex(index);
   }
   
-  const onPageSizeChanged = (e) => {
+  const onPageSizeChanged = (e: any) => {
     // page size
     setPageSize(e.target.value);
   }
@@ -180,11 +179,11 @@ function ImportDataTable() {
   };
 
   const [columnDefs] = useState([
-    { field: 'bucket', headerName: 'BUCKET', cellRenderer: BucketColumnRenderer, width: 180 },
-    { field: 'status', headerName: 'STATUS', cellRenderer: StatusColumnRenderer, width: 200 },
-    { field: 'importedBy', headerName: 'IMPORTED BY', cellRenderer: ImportedByColumnRenderer },
-    { field: 'importedOn', headerName: 'IMPORTED ON', cellRenderer: ImportedOnColumnRenderer },
-    { field: 'importFile', headerName: 'IMPORT FILE', cellRenderer: ImportFileColumnRenderer, width: 180 },
+    { field: 'bucket', headerName: 'bucket', cellRenderer: BucketColumnRenderer, width: 180 },
+    { field: 'status', headerName: 'status', cellRenderer: StatusColumnRenderer, width: 200 },
+    { field: 'importedBy', headerName: 'imported by', cellRenderer: ImportedByColumnRenderer },
+    { field: 'importedOn', headerName: 'imported on', cellRenderer: ImportedOnColumnRenderer },
+    { field: 'importFile', headerName: 'import file', cellRenderer: ImportFileColumnRenderer, width: 180 },
     { field: 'flyout', headerName: '', sortable: false, cellRenderer: KebabButtonRenderer, width: 52 },
   ]);
 
@@ -205,7 +204,7 @@ function ImportDataTable() {
   return (
     // IMPT: requires height and width for some reason?
     <div className="mx-auto" style={{ height: '40vh' }}>
-      <div className="ag-theme-alpine h-full w-full">
+      <div className="ag-theme-custom h-full w-full">
         <Importheader />
         <div className="grid-header">
           {pageIndex * pageSize + 1}-{(pageIndex + 1) * pageSize} of {rowData.length} shown
@@ -225,7 +224,7 @@ function ImportDataTable() {
             <select
               value={pageSize}
               onChange={onPageSizeChanged}
-              id="page-size"
+              className="page-size"
             >
               <option value="10" >10</option>
               <option value="20">20</option>

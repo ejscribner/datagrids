@@ -5,8 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AgGridReact } from 'ag-grid-react';
 import indexData from './data/indexStatus.json';
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
-import 'ag-grid-community/styles/ag-theme-alpine.css';
-import './style.css';
+import './style.scss';
 
 fontawesome.library.add(faTrashCan as IconDefinition, faCircle as IconDefinition); // Optional theme CSS
 
@@ -65,13 +64,13 @@ function IndexDataTable() {
     index < 0 ? setPageIndex(0) : setPageIndex(index);
   }
   
-  const onPageSizeChanged = (e) => {
+  const onPageSizeChanged = (e: any) => {
     // page size
     setPageSize(e.target.value);
   }
 
 
-  const onCellClicked = (params) => {
+  const onCellClicked = (params: any) => {
     if (params.column.colId === 'delete') {
       params.api.applyTransaction({
         remove: [params.node.data],
@@ -112,8 +111,10 @@ function IndexDataTable() {
   return (
     // IMPT: requires height and width for some reason?
     <div className="mx-auto" style={{ height: '40vh' }}>
-      <div className="ag-theme-alpine h-full w-full">
-        <div className="index-header">Indexes</div>
+      <div className="ag-theme-custom h-full w-full">
+        <div className='header'>
+          <div className="header-title">Indexes</div>
+        </div>
         <div className="grid-header">
           {pageIndex * pageSize + 1}-{(pageIndex + 1) * pageSize} of {rowData.length} shown
         </div>
@@ -131,7 +132,7 @@ function IndexDataTable() {
             <select
               value={pageSize}
               onChange={onPageSizeChanged}
-              id="page-size"
+              className="page-size"
             >
               <option value="10" >10</option>
               <option value="20">20</option>

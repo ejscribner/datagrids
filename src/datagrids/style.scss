@@ -1,160 +1,99 @@
 @use "ag-grid-community/styles" as ag;
-
-@include ag.grid-styles((
-  themes: (
-    custom: (
-      extend-theme: alpine,
-    )
-  ),
-  --ag-header-height: 30px,
-));
-
-.ag-theme-custom .ag-icon-none{
-  --ag-icon-font-family: 'Material Design Icons';
-  --ag-icon-font-code-none: '\F0A65';
+@include ag.grid-styles(
+  (
+    themes: (
+      custom: (
+        extend-theme: alpine
+      )
+    ),
+    --ag-header-height: 30px
+  )
+);
+.ag-theme-custom .ag-icon-none {
+  --ag-icon-font-family: "Material Design Icons";
+  --ag-icon-font-code-none: "\F0A65";
 }
-.ag-theme-custom .ag-icon-desc{
-  --ag-icon-font-family: 'Material Design Icons';
-  --ag-icon-font-code-desc: '\F06B6';
-  padding-top: 6px;
-  color: #1e90ff;
+.ag-theme-custom .ag-icon-desc {
+  @apply text-[#1e90ff] pt-1.5;
+  --ag-icon-font-family: "Material Design Icons";
+  --ag-icon-font-code-desc: "\F06B6";
 }
-.ag-theme-custom .ag-icon-asc{
-  --ag-icon-font-family: 'Material Design Icons';
-  --ag-icon-font-code-asc: '\F06B7';
-  padding-bottom: 6px;
-  color: #1e90ff;
-}
-.ag-theme-custom .ag-header-cell {
-  color: #6d6868;
-  font-weight: 600;
-  font-size: 12px;
-  text-transform: uppercase;
+.ag-theme-custom .ag-icon-asc {
+  @apply text-[#1e90ff] pb-1.5;
+  --ag-icon-font-family: "Material Design Icons";
+  --ag-icon-font-code-asc: "\F06B7";
 }
 .ag-theme-custom .page-size {
-  border-width : 0px;
-  font-size: small;
-  padding-right: 20px;
-  padding-top: 4px;
-  padding-bottom: 3px;
-  padding-left: 3px;
+  @apply text-[small] pl-1 pr-5 py-1 border-0;
 }
 .ag-theme-custom .ag-header-row-column {
-  color: #aaaaaa;
+  @apply text-[#aaaaaa];
 }
 .ag-theme-custom .grid-header {
-  border: 1px solid;
-  border-color: #aaaaaa;
-  border-bottom: none; 
-  padding-left: 18px;
-  padding-top: 2px;
-  padding-bottom: 2px; 
-  color: #6d6868; 
-  font-weight: bolder
+  @apply border text-[#6d6868] font-[bolder] pl-[18px] py-0.5 border-solid border-[#aaaaaa];
+  border-bottom: none;
 }
 .ag-theme-custom .grid-bottom {
-  display: flex; 
-  float: right;
-  padding: 10px;
-  font-weight: normal; 
-  color: #aaaaaa;
+  @apply flex float-right font-[normal] text-[#aaaaaa] p-2.5;
 }
 .ag-theme-custom .page-last {
-  margin-left: 30px; 
-  margin-right: 30px; 
-  font-size: larger;
+  @apply text-[larger] mx-[30px];
 }
 .ag-theme-custom .page-next {
-  margin-right: 8px; 
-  font-size: larger;
+  @apply text-[larger] mr-2;
 }
-
 .btn {
-  border: none; /* Remove borders */
-  color: #ffffff; /* Add a text color */
-  padding-top: 4px; /* Add some padding */
-  padding-Bottom: 4px; /* Add some padding */
-  min-width: 6em;
-  font-size: 18px;
-  border-radius: 4px;
-  cursor: pointer; /* Add a pointer cursor on mouse-over */
+  @apply text-[white] min-w-[6em] text-lg rounded cursor-pointer pt-1 pb-1 border-[none];
 }
 .info {
-  background-color: #0266c2;
-  float: right;
+  @apply bg-[#0266c2] float-right;
 }
 .save {
-  background-color:#0266c2;
-  float: left;
+  @apply bg-[#0266c2] float-left;
 }
 .cancel {
-  margin-left: 1em;
-  background-color: #ffffff;
-  float: left;
-  color: #0266c2;
+  @apply bg-[white] float-left text-[#0266c2] ml-[1em];
 }
-.services{
+.header-white .ag-header-cell {
+  @apply text-[#6d6868] font-semibold uppercase;
+  font-size: 12px;
+}
+.header-black {
   --ag-header-background-color: #000000;
 }
-.services .ag-header-cell-text {
-  color: #ffffff;
+.header-black .ag-header-cell-text {
+  @apply text-[white] font-semibold uppercase;
 }
-.btn-add-group{
-  background-color: #ffffff; 
-  border-color: #2196F3; 
-  border-width: 2px; 
-  padding: 3px; 
-  border-radius: 5px;
-  float: right;
+.btn-add-group {
+  @apply bg-[white] text-[#0266c2] float-right p-[3px] rounded-[5px] border-2;
 }
-.btn-add-group .inline{
-  background-color: #0266c2; 
-  color: white; 
-  border-radius: 5px; 
-  padding: 15px; 
-  font-size: small; 
-  font-weight: 600;
+.btn-add-group .inline {
+  @apply bg-[#0266c2] text-[white] text-[small] font-semibold p-[15px] rounded-[5px];
 }
 .header {
-  display: flex; 
-  justify-content: space-between; 
-  margin-bottom: 24px; 
-  margin-top: 24px;
+  @apply flex justify-between my-6;
 }
-.header-left{
-  flex:50%;
-  display:flex;
-  align-self:center;
+.header-left {
+  @apply flex-[50%] flex self-center;
 }
-.header-right{
-  flex:50%;
+.header-right {
+  @apply flex-[50%];
 }
 .header-title {
-  font-weight: 800;
-  font-size: 20px;
+  @apply font-extrabold text-xl;
 }
 .header-subtitle {
-  font-size: small; 
-  margin-bottom: 20px; 
-  font-weight: 500;
+  @apply text-[small] font-medium mb-5;
 }
 .save-option {
-  flex: 50%; 
-  margin-top: 0.5em;
+  @apply flex-[50%] mt-[0.5em];
 }
-.header-search{
-  padding:3px;
-  border-color:#ffffff #ffffff #aaaaaa #ffffff;
-  border-width:1px;
-  margin-left:12px;
-  display : flex;
-  align-self:stretch;
+.header-search {
+  @apply flex self-stretch ml-3 p-[3px] border-b border-[#aaaaaa];
 }
-.header-search input{
-  font-size: 18px;
-  outline: none;
+.header-search input {
+  @apply text-lg outline-none;
 }
-.header-toggle{
-  margin-left:12px;
-  align-self:stretch;
+.header-toggle {
+  @apply self-stretch ml-3;
 }

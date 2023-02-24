@@ -208,7 +208,7 @@ function ServicesDataTable() {
         <div className='header-subtitle'>Your available services depend on your database plan. <a href='#' style={{color:'#0266c2'}}>Learn More</a>
         </div>
         <AgGridReact
-          className='services'
+          className='header-black'
           rowData={rowData}
           columnDefs={columnDefs}
           rowHeight={120}

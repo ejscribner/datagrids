@@ -211,6 +211,7 @@ function ImportDataTable() {
           {pageIndex * pageSize + 1}-{(pageIndex + 1) * pageSize} of {rowData.length} shown
         </div>
         <AgGridReact
+          className='header-white'
           rowData={rowData}
           columnDefs={columnDefs}
           defaultColDef={defaultColDef}

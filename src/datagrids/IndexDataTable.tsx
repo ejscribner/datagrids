@@ -1,11 +1,12 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState, useEffect } from 'react';
 import fontawesome, { IconDefinition } from '@fortawesome/fontawesome';
 import { faCircle, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AgGridReact } from 'ag-grid-react';
 import indexData from './data/indexStatus.json';
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
-import 'ag-grid-community/styles/ag-theme-alpine.css';
+import './style.scss';
+import Pagination from 'components/pagination';
 
 fontawesome.library.add(faTrashCan as IconDefinition, faCircle as IconDefinition); // Optional theme CSS
 
@@ -28,6 +29,7 @@ function StatusColumnRenderer(props: any) {
   );
 }
 
+
 function IndexDataTable() {
   const defaultColDef = useMemo(() => {
     return {
@@ -38,26 +40,54 @@ function IndexDataTable() {
   }, []);
 
   const [rowData, setRowData] = useState([]);
+  const [pageSize, setPageSize] = useState(10);
+  const [pageIndex, setPageIndex] = useState(0);
 
   // @ts-ignore
-  const onCellClicked = (params) => {
+  useEffect(() => {
+    //change page size
+  }, [pageSize]);
+  useEffect(() => {
+    //change page
+  }, [pageIndex]);
+
+  const onNextPage = () => {
+    //next page
+    const index = pageIndex + 1;
+    const pageMax = Math.floor(rowData.length/pageSize)
+    index > pageMax ? setPageIndex(pageMax) : setPageIndex(index);
+    
+  }
+  
+  const onLastPage = () => {
+    //previous page
+    const index = pageIndex - 1;
+    index < 0 ? setPageIndex(0) : setPageIndex(index);
+  }
+  
+  const onPageSizeChanged = (e: any) => {
+    // page size
+    setPageSize(e.target.value);
+  }
+
+
+  const onCellClicked = (params: any) => {
     if (params.column.colId === 'delete') {
       params.api.applyTransaction({
         remove: [params.node.data],
       });
     }
   };
-
   const [columnDefs] = useState([
-    { field: 'indexName', headerName: 'Index Name', width: 150 },
-    { field: 'status', headerName: 'Status', cellRenderer: StatusColumnRenderer },
-    { field: 'reqSec', headerName: 'Requests/Sec' },
-    { field: 'residentRatio', headerName: 'Resident Ratio' },
-    { field: 'items', headerName: 'Items', width: 100 },
-    { field: 'dataSize', headerName: 'Data Size' },
-    { field: 'bucket', headerName: 'Bucket' },
-    { field: 'scope', headerName: 'Scope' },
-    { field: 'collection', headerName: 'Collection' },
+    { field: 'indexName', headerName: 'INDEX NAME', width: 150, cellStyle: {fontWeight: 'bold'}},
+    { field: 'status', headerName: 'STATUS', cellRenderer: StatusColumnRenderer },
+    { field: 'reqSec', headerName: 'REQUEST/SEC', width: 150},
+    { field: 'residentRatio', headerName: 'RESIDENT RATIO', width: 150},
+    { field: 'items', headerName: 'ITEMS', width: 100 },
+    { field: 'dataSize', headerName: 'DATA SIZE' },
+    { field: 'bucket', headerName: 'BUCKET' },
+    { field: 'scope', headerName: 'SCOPE' },
+    { field: 'collection', headerName: 'COLLECTION' },
     { field: 'delete', headerName: '', sortable: false, cellRenderer: DeleteButtonRenderer, width: 52 },
   ]);
 
@@ -82,16 +112,29 @@ function IndexDataTable() {
   return (
     // IMPT: requires height and width for some reason?
     <div className="mx-auto" style={{ height: '40vh' }}>
-      <div className="ag-theme-alpine h-full w-full">
+      <div className="ag-theme-custom h-full w-full">
+        <div className='header'>
+          <div className="header-title">Indexes</div>
+        </div>
+        <div className="grid-header">
+          {pageIndex * pageSize + 1}-{(pageIndex + 1) * pageSize} of {rowData.length} shown
+        </div>
         <AgGridReact
+          className='header-white'
           rowData={rowData}
           columnDefs={columnDefs}
           defaultColDef={defaultColDef}
           onGridReady={onGridReady}
-          pagination
-          paginationPageSize={10}
           onCellClicked={onCellClicked}
           onGridSizeChanged={(e) => (e.clientWidth > 1024 ? e.api.sizeColumnsToFit() : null)}
+        />
+        <Pagination 
+          pageIndex={pageIndex}
+          pageSize={pageSize}
+          onPageSizeChanged={onPageSizeChanged}
+          onLastPage={onLastPage}
+          onNextPage={onNextPage}
+          total={rowData.length}
         />
       </div>
     </div>

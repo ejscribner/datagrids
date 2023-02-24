@@ -1,0 +1,99 @@
+@use "ag-grid-community/styles" as ag;
+@include ag.grid-styles(
+  (
+    themes: (
+      custom: (
+        extend-theme: alpine
+      )
+    ),
+    --ag-header-height: 1.875em,
+  )
+);
+.ag-theme-custom .ag-icon-none {
+  --ag-icon-font-family: "Material Design Icons";
+  --ag-icon-font-code-none: "\F0A65";
+}
+.ag-theme-custom .ag-icon-desc {
+  @apply text-[#1e90ff] pt-1.5;
+  --ag-icon-font-family: "Material Design Icons";
+  --ag-icon-font-code-desc: "\F06B6";
+}
+.ag-theme-custom .ag-icon-asc {
+  @apply text-[#1e90ff] pb-1.5;
+  --ag-icon-font-family: "Material Design Icons";
+  --ag-icon-font-code-asc: "\F06B7";
+}
+.ag-theme-custom .page-size {
+  @apply text-[small] pl-1 pr-5 py-1 border-0;
+}
+.ag-theme-custom .ag-header-row-column {
+  @apply text-[#aaaaaa];
+}
+.ag-theme-custom .grid-header {
+  @apply border text-[#6d6868] font-[bolder] pl-[18px] py-0.5 border-solid border-[#aaaaaa];
+  border-bottom: none;
+}
+.ag-theme-custom .grid-bottom {
+  @apply flex float-right font-[normal] text-[#aaaaaa] p-2.5;
+}
+.ag-theme-custom .page-last {
+  @apply text-[larger] mx-[30px];
+}
+.ag-theme-custom .page-next {
+  @apply text-[larger] mr-2;
+}
+.btn {
+  @apply text-[white] min-w-[6em] text-lg rounded cursor-pointer px-1 border-[none];
+}
+.info {
+  @apply bg-[#0266c2] float-right;
+}
+.save {
+  @apply bg-[#0266c2] float-left;
+}
+.cancel {
+  @apply bg-[white] float-left text-[#0266c2] ml-[1em];
+}
+.header-white .ag-header-cell {
+  @apply text-[#6d6868] font-semibold uppercase;
+  font-size: 12px;
+}
+.header-black {
+  --ag-header-background-color: #000000;
+}
+.header-black .ag-header-cell-text {
+  @apply text-[white] font-semibold uppercase;
+}
+.btn-add-group {
+  @apply bg-[white] text-[#0266c2] float-right p-[3px] rounded-[5px] border-2;
+}
+.btn-add-group .inline {
+  @apply bg-[#0266c2] text-[white] text-[small] font-semibold p-[15px] rounded-[5px];
+}
+.header {
+  @apply flex justify-between my-6;
+}
+.header-left {
+  @apply flex-[50%] flex self-center;
+}
+.header-right {
+  @apply flex-[50%];
+}
+.header-title {
+  @apply font-extrabold text-xl;
+}
+.header-subtitle {
+  @apply text-[small] font-medium mb-5;
+}
+.save-option {
+  @apply flex-[50%] mt-[0.5em];
+}
+.header-search {
+  @apply flex self-stretch ml-3 p-[3px] border-b border-[#aaaaaa];
+}
+.header-search input {
+  @apply text-lg outline-none;
+}
+.header-toggle {
+  @apply self-stretch ml-3;
+}

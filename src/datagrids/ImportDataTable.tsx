@@ -1,12 +1,13 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState, useEffect } from 'react';
 import fontawesome, { IconDefinition } from '@fortawesome/fontawesome';
 import { faCircle, faCircleUser, faEllipsisV, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AgGridReact } from 'ag-grid-react';
 import importData from './data/importData.json';
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
-import 'ag-grid-community/styles/ag-theme-alpine.css';
-
+import './style.scss';
+import Importheader from 'components/importHeader';
+import Pagination from "components/pagination";
 fontawesome.library.add(
   faEllipsisV as IconDefinition,
   faCircle as IconDefinition,
@@ -143,8 +144,34 @@ function ImportDataTable() {
     };
   }, []);
 
+  const [pageSize, setPageSize] = useState(10);
+  const [pageIndex, setPageIndex] = useState(0);
   const [rowData, setRowData] = useState([]);
+  useEffect(() => {
+    //change page size
+  }, [pageSize]);
+  useEffect(() => {
+    //change page
+  }, [pageIndex]);
 
+  const onNextPage = () => {
+    //next page
+    const index = pageIndex + 1;
+    const pageMax = Math.floor(rowData.length/pageSize)
+    index > pageMax ? setPageIndex(pageMax) : setPageIndex(index);
+    
+  }
+  
+  const onLastPage = () => {
+    //previous page
+    const index = pageIndex - 1;
+    index < 0 ? setPageIndex(0) : setPageIndex(index);
+  }
+  
+  const onPageSizeChanged = (e: any) => {
+    // page size
+    setPageSize(e.target.value);
+  }
   // @ts-ignore
   const onCellClicked = (params) => {
     if (params.column.colId === 'flyout') {
@@ -153,11 +180,11 @@ function ImportDataTable() {
   };
 
   const [columnDefs] = useState([
-    { field: 'bucket', headerName: 'Bucket', cellRenderer: BucketColumnRenderer, width: 180 },
-    { field: 'status', headerName: 'Status', cellRenderer: StatusColumnRenderer, width: 200 },
-    { field: 'importedBy', headerName: 'Imported By', cellRenderer: ImportedByColumnRenderer },
-    { field: 'importedOn', headerName: 'Imported On', cellRenderer: ImportedOnColumnRenderer },
-    { field: 'importFile', headerName: 'Import File', cellRenderer: ImportFileColumnRenderer, width: 180 },
+    { field: 'bucket', headerName: 'bucket', cellRenderer: BucketColumnRenderer, width: 180 },
+    { field: 'status', headerName: 'status', cellRenderer: StatusColumnRenderer, width: 200 },
+    { field: 'importedBy', headerName: 'imported by', cellRenderer: ImportedByColumnRenderer },
+    { field: 'importedOn', headerName: 'imported on', cellRenderer: ImportedOnColumnRenderer },
+    { field: 'importFile', headerName: 'import file', cellRenderer: ImportFileColumnRenderer, width: 180 },
     { field: 'flyout', headerName: '', sortable: false, cellRenderer: KebabButtonRenderer, width: 52 },
   ]);
 
@@ -178,17 +205,28 @@ function ImportDataTable() {
   return (
     // IMPT: requires height and width for some reason?
     <div className="mx-auto" style={{ height: '40vh' }}>
-      <div className="ag-theme-alpine h-full w-full">
+      <div className="ag-theme-custom h-full w-full">
+        <Importheader />
+        <div className="grid-header">
+          {pageIndex * pageSize + 1}-{(pageIndex + 1) * pageSize} of {rowData.length} shown
+        </div>
         <AgGridReact
+          className='header-white'
           rowData={rowData}
           columnDefs={columnDefs}
           defaultColDef={defaultColDef}
           onGridReady={onGridReady}
-          pagination
-          paginationPageSize={10}
           rowHeight={65}
           onCellClicked={onCellClicked}
           onGridSizeChanged={(e) => (e.clientWidth > 1024 ? e.api.sizeColumnsToFit() : null)}
+        />
+        <Pagination 
+          pageIndex={pageIndex}
+          pageSize={pageSize}
+          onPageSizeChanged={onPageSizeChanged}
+          onLastPage={onLastPage}
+          onNextPage={onNextPage}
+          total={rowData.length}
         />
       </div>
     </div>

@@ -6,7 +6,7 @@
         extend-theme: alpine
       )
     ),
-    --ag-header-height: 30px
+    --ag-header-height: 1.875em,
   )
 );
 .ag-theme-custom .ag-icon-none {
@@ -43,7 +43,7 @@
   @apply text-[larger] mr-2;
 }
 .btn {
-  @apply text-[white] min-w-[6em] text-lg rounded cursor-pointer pt-1 pb-1 border-[none];
+  @apply text-[white] min-w-[6em] text-lg rounded cursor-pointer px-1 border-[none];
 }
 .info {
   @apply bg-[#0266c2] float-right;

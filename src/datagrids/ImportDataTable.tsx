@@ -7,6 +7,7 @@ import importData from './data/importData.json';
 import 'ag-grid-community/styles/ag-grid.css'; // Core grid CSS, always needed
 import './style.scss';
 import Importheader from 'components/importHeader';
+import Pagination from "components/pagination";
 fontawesome.library.add(
   faEllipsisV as IconDefinition,
   faCircle as IconDefinition,
@@ -218,30 +219,14 @@ function ImportDataTable() {
           onCellClicked={onCellClicked}
           onGridSizeChanged={(e) => (e.clientWidth > 1024 ? e.api.sizeColumnsToFit() : null)}
         />
-        <div className="grid-bottom">
-          <div>
-            <span style={{marginRight: "10px"}}>Rows per page :</span> 
-            <select
-              value={pageSize}
-              onChange={onPageSizeChanged}
-              className="page-size"
-            >
-              <option value="10" >10</option>
-              <option value="20">20</option>
-              <option value="50">50</option>
-              <option value="100">100</option>
-            </select>
-          </div>
-          <div style={{alignSelf: "center"}}>
-            <span style={{marginLeft:"20px"}}>{pageIndex * pageSize + 1}-{(pageIndex + 1) * pageSize} of {rowData.length}</span>
-            <button className="page-last" onClick = {onLastPage}>
-              {"<"}
-            </button>
-            <button className="page-next" onClick = {onNextPage}>
-              {">"}
-            </button>
-          </div>
-        </div>
+        <Pagination 
+          pageIndex={pageIndex}
+          pageSize={pageSize}
+          onPageSizeChanged={onPageSizeChanged}
+          onLastPage={onLastPage}
+          onNextPage={onNextPage}
+          total={rowData.length}
+        />
       </div>
     </div>
   );
